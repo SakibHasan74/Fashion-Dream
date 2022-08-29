@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>RegistrationForm_v7 by Colorlib</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet" href="~/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="~/css/style_01.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="inner">
+            <form action="~/UserDashboard/Feedback" method="post">
+                <h3>Feedback</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                <label class="form-group">
+                    <input type="text" class="form-control" name="Name" required>
+                    <span>Your Name</span>
+                    <span class="border"></span>
+                </label>
+                <label class="form-group">
+                    <input type="text" class="form-control" name="Email" required>
+                    <span for="">Your Mail</span>
+                    <span class="border"></span>
+                </label>
+                <input type="hidden" name="ID" value="@FashionDream.Controllers.UserController.UID">
+                <label class="form-group">
+                    <textarea name="Review" id="" class="form-control" ></textarea>
+                    <span for="">Your Message</span>
+                    <span class="border"></span>
+                </label>
+                <button>
+                    Submit
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

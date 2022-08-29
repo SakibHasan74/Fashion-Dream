@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a071677ccee441278cef7917d751bfdd" Name="Diagram1">
+        <EntityTypeShape EntityType="FashionDream1Model.Cart" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FashionDream1Model.Feedback" Width="1.5" PointX="3.875" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FashionDream1Model.history" Width="1.5" PointX="6.375" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="FashionDream1Model.Payment" Width="1.5" PointX="3.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FashionDream1Model.Product" Width="1.5" PointX="3.875" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FashionDream1Model.UserAccount" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FashionDream1Model.Variation" Width="1.5" PointX="6.375" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="FashionDream1Model.fk_pid" ManuallyRouted="false" />
+        <AssociationConnector Association="FashionDream1Model.fk_uid" ManuallyRouted="false" />
+        <AssociationConnector Association="FashionDream1Model.fk_vid" ManuallyRouted="false" />
+        <AssociationConnector Association="FashionDream1Model.fk_uid_feedback" ManuallyRouted="false" />
+        <AssociationConnector Association="FashionDream1Model.fk_pid_order" ManuallyRouted="false" />
+        <AssociationConnector Association="FashionDream1Model.fk_uid_order" ManuallyRouted="false" />
+        <AssociationConnector Association="FashionDream1Model.fk_uid_payment" ManuallyRouted="false" />
+        <AssociationConnector Association="FashionDream1Model.fk_pid_v" ManuallyRouted="false" />
+        <AssociationConnector Association="FashionDream1Model.fk_uid_v" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

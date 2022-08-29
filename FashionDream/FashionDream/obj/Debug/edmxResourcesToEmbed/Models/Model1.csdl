@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FashionDream1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartID" />
+    </Key>
+    <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="TotalCost" Type="Int32" />
+    <Property Name="VariationID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.fk_pid" FromRole="Cart" ToRole="Product" />
+    <NavigationProperty Name="UserAccount" Relationship="Self.fk_uid" FromRole="Cart" ToRole="UserAccount" />
+    <NavigationProperty Name="Variation" Relationship="Self.fk_vid" FromRole="Cart" ToRole="Variation" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="FBID" />
+    </Key>
+    <Property Name="FBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Review" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserAccount" Relationship="Self.fk_uid_feedback" FromRole="Feedback" ToRole="UserAccount" />
+  </EntityType>
+  <EntityType Name="history">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CartID" Type="Int32" />
+    <Property Name="ID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="TotalCost" Type="Int32" />
+    <Property Name="VariationID" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.fk_pid_order" FromRole="history" ToRole="Product" />
+    <NavigationProperty Name="UserAccount" Relationship="Self.fk_uid_order" FromRole="history" ToRole="UserAccount" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentID" />
+    </Key>
+    <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="Int32" />
+    <Property Name="BillNo" Type="Int32" />
+    <Property Name="Method" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentTime" Type="DateTime" Precision="0" />
+    <Property Name="PaymentStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserAccount" Relationship="Self.fk_uid_payment" FromRole="Payment" ToRole="UserAccount" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductImage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ProductPrice" Type="Int32" Nullable="false" />
+    <Property Name="ProductQuantity" Type="Int32" Nullable="false" />
+    <Property Name="ProductDetails" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ProductType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Carts" Relationship="Self.fk_pid" FromRole="Product" ToRole="Cart" />
+    <NavigationProperty Name="histories" Relationship="Self.fk_pid_order" FromRole="Product" ToRole="history" />
+    <NavigationProperty Name="Variations" Relationship="Self.fk_pid_v" FromRole="Product" ToRole="Variation" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Carts" Relationship="Self.fk_uid" FromRole="UserAccount" ToRole="Cart" />
+    <NavigationProperty Name="Feedbacks" Relationship="Self.fk_uid_feedback" FromRole="UserAccount" ToRole="Feedback" />
+    <NavigationProperty Name="histories" Relationship="Self.fk_uid_order" FromRole="UserAccount" ToRole="history" />
+    <NavigationProperty Name="Payments" Relationship="Self.fk_uid_payment" FromRole="UserAccount" ToRole="Payment" />
+    <NavigationProperty Name="Variations" Relationship="Self.fk_uid_v" FromRole="UserAccount" ToRole="Variation" />
+  </EntityType>
+  <EntityType Name="Variation">
+    <Key>
+      <PropertyRef Name="VariationID" />
+    </Key>
+    <Property Name="VariationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="Size" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Color" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ID" Type="Int32" />
+    <NavigationProperty Name="Carts" Relationship="Self.fk_vid" FromRole="Variation" ToRole="Cart" />
+    <NavigationProperty Name="Product" Relationship="Self.fk_pid_v" FromRole="Variation" ToRole="Product" />
+    <NavigationProperty Name="UserAccount" Relationship="Self.fk_uid_v" FromRole="Variation" ToRole="UserAccount" />
+  </EntityType>
+  <Association Name="fk_pid">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_uid">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_vid">
+    <End Role="Variation" Type="Self.Variation" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Variation">
+        <PropertyRef Name="VariationID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="VariationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_uid_feedback">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_pid_order">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="history" Type="Self.history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="history">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_uid_order">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+    <End Role="history" Type="Self.history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="history">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_uid_payment">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_pid_v">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Variation" Type="Self.Variation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Variation">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_uid_v">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+    <End Role="Variation" Type="Self.Variation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Variation">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FashionDream1Entities12" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Carts" EntityType="Self.Cart" />
+    <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+    <EntitySet Name="histories" EntityType="Self.history" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
+    <EntitySet Name="Variations" EntityType="Self.Variation" />
+    <AssociationSet Name="fk_pid" Association="Self.fk_pid">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_uid" Association="Self.fk_uid">
+      <End Role="UserAccount" EntitySet="UserAccounts" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_vid" Association="Self.fk_vid">
+      <End Role="Variation" EntitySet="Variations" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_uid_feedback" Association="Self.fk_uid_feedback">
+      <End Role="UserAccount" EntitySet="UserAccounts" />
+      <End Role="Feedback" EntitySet="Feedbacks" />
+    </AssociationSet>
+    <AssociationSet Name="fk_pid_order" Association="Self.fk_pid_order">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="history" EntitySet="histories" />
+    </AssociationSet>
+    <AssociationSet Name="fk_uid_order" Association="Self.fk_uid_order">
+      <End Role="UserAccount" EntitySet="UserAccounts" />
+      <End Role="history" EntitySet="histories" />
+    </AssociationSet>
+    <AssociationSet Name="fk_uid_payment" Association="Self.fk_uid_payment">
+      <End Role="UserAccount" EntitySet="UserAccounts" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="fk_pid_v" Association="Self.fk_pid_v">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Variation" EntitySet="Variations" />
+    </AssociationSet>
+    <AssociationSet Name="fk_uid_v" Association="Self.fk_uid_v">
+      <End Role="UserAccount" EntitySet="UserAccounts" />
+      <End Role="Variation" EntitySet="Variations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
